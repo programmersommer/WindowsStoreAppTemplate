@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using Windows.UI.Notifications;
+
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
 namespace WinStoreAdvancedDemo
@@ -33,7 +35,6 @@ namespace WinStoreAdvancedDemo
 
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-
 
         }
 
@@ -106,7 +107,26 @@ namespace WinStoreAdvancedDemo
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+
+            UpdateTileWithText();
+
             deferral.Complete();
         }
+
+
+        void UpdateTileWithText()
+        {
+            //    #  обновление квадратного тайла
+            var tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150Text04);
+            // или можно обновить wide тайл var tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150Text04);
+            var tileAttributes = tileXml.GetElementsByTagName("text");
+            string tiletext = "Какой - либо текст для отображения на тайле";
+            tileAttributes[0].AppendChild(tileXml.CreateTextNode(tiletext));
+            var tileNotification = new TileNotification(tileXml);
+            tileNotification.ExpirationTime = DateTimeOffset.UtcNow.AddHours(1);
+            TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotification);
+            // так можно очистить:   TileUpdateManager.CreateTileUpdaterForApplication().Clear();
+        }
+
     }
 }
