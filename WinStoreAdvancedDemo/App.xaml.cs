@@ -34,6 +34,7 @@ namespace WinStoreAdvancedDemo
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
+
         }
 
         /// <summary>
