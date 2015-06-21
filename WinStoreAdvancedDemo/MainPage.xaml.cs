@@ -63,7 +63,15 @@ namespace WinStoreAdvancedDemo
             requestData.Properties.Description = "И здесь добавить какое-то описание.Как правило, текст содержит рекомендацию установить приложение.";
         }
 
+        private void ShareButton_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.ApplicationModel.DataTransfer.DataTransferManager.ShowShareUI();
+        }
 
-
+        private async void ReviewButton_Click(object sender, RoutedEventArgs e)
+        {
+            var uri = new Uri("ms-windows-store:PDP?PFN=9cc1e6dd-9d82-4736-aee5-acb9a01d9c39_jx7smx7qqfhe4");
+            await Windows.System.Launcher.LaunchUriAsync(uri);
+        }
     }
 }

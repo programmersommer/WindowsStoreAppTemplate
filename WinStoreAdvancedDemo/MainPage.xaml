@@ -10,4 +10,17 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     </Grid>
+
+
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Label=" Vote and review" Icon="Like" Click="ReviewButton_Click"/>
+
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Share" Icon="OtherUser" Click="ShareButton_Click"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
 </Page>
