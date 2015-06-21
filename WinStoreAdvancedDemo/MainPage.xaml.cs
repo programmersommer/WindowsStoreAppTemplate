@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,11 +26,28 @@ namespace WinStoreAdvancedDemo
     public sealed partial class MainPage : Page
     {
 
+        int appRunCount = 0;
+        Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
+
         private DataTransferManager dataTransferManager;
 
         public MainPage()
         {
             this.InitializeComponent();
+
+            try
+            {
+                appRunCount = (int)localSettings.Values["AppRunCount"];
+            }
+            catch { }
+
+            appRunCount++;
+
+            try
+            {
+                localSettings.Values["AppRunCount"] = appRunCount;
+            }
+            catch { }
         }
 
 
@@ -73,5 +91,33 @@ namespace WinStoreAdvancedDemo
             var uri = new Uri("ms-windows-store:PDP?PFN=9cc1e6dd-9d82-4736-aee5-acb9a01d9c39_jx7smx7qqfhe4");
             await Windows.System.Launcher.LaunchUriAsync(uri);
         }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (appRunCount == 5)
+            {
+                var messageDialog = new Windows.UI.Popups.MessageDialog("Оставьте, пожалуйста, отзыв о приложении", "Проголосуйте за нас!");
+                // можем добавить не больше трех команд/вариантов выбора 
+                messageDialog.Commands.Add(new Windows.UI.Popups.UICommand("Поставить оценку", new Windows.UI.Popups.UICommandInvokedHandler(CommandHandler)));
+                messageDialog.Commands.Add(new Windows.UI.Popups.UICommand("Я уже ставил оценку", new Windows.UI.Popups.UICommandInvokedHandler(CommandHandler)));
+                messageDialog.Commands.Add(new Windows.UI.Popups.UICommand("В другой раз", new Windows.UI.Popups.UICommandInvokedHandler(CommandHandler)));
+
+                messageDialog.DefaultCommandIndex = 0;
+                messageDialog.CancelCommandIndex = 2;
+                await messageDialog.ShowAsync();
+            }
+        }
+
+        private async void CommandHandler(IUICommand command)
+        {
+            if (command.Label=="Поставить оценку")
+            {
+                var uri = new Uri("ms-windows-store:PDP?PFN=9cc1e6dd-9d82-4736-aee5-acb9a01d9c39_jx7smx7qqfhe4");
+                await Windows.System.Launcher.LaunchUriAsync(uri);
+            }
+        }
+
+
+
     }
 }
