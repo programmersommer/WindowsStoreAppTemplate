@@ -19,7 +19,7 @@ using Windows.UI.Notifications;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
-namespace WinStoreAdvancedDemo
+namespace WinStoreTemplate
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -120,13 +120,22 @@ namespace WinStoreAdvancedDemo
         {
             //    #  обновление квадратного тайла
             var tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150Text04);
-            // или можно обновить wide тайл var tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150Text04);
-            var tileAttributes = tileXml.GetElementsByTagName("text");
+           var tileAttributes = tileXml.GetElementsByTagName("text");
             string tiletext = "Какой - либо текст для отображения на тайле";
             tileAttributes[0].AppendChild(tileXml.CreateTextNode(tiletext));
             var tileNotification = new TileNotification(tileXml);
             tileNotification.ExpirationTime = DateTimeOffset.UtcNow.AddHours(1);
             TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotification);
+
+            //    #  обновление широкого тайла
+            var tileXml2 = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150Text04);
+            var tileAttributes2 = tileXml2.GetElementsByTagName("text");
+            var tiletext2 = "Какой - либо текст для отображения на тайле";
+            tileAttributes2[0].AppendChild(tileXml2.CreateTextNode(tiletext2));
+            var tileNotification2 = new TileNotification(tileXml2);
+            tileNotification2.ExpirationTime = DateTimeOffset.UtcNow.AddHours(1);
+            TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotification2);
+
             // так можно очистить:   TileUpdateManager.CreateTileUpdaterForApplication().Clear();
         }
 
