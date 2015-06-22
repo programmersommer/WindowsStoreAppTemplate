@@ -8,7 +8,7 @@
     mc:Ignorable="d" Loaded="Page_Loaded">
 
     <StackPanel Background="Black">
-        <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,100,0,0" FontSize="32">Это шаблон приложения</TextBlock>
+        <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="0,100,0,0" FontSize="32">App template - that's it!</TextBlock>
     </StackPanel>
 
 

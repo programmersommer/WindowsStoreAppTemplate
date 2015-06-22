@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
   <Identity Name="9cc1e6dd-9d82-4736-aee5-acb9a01d9c39" Publisher="CN=Alexej Sommer" Version="1.0.0.0" />
   <Properties>
-    <DisplayName>WinStoreAdvancedDemo</DisplayName>
+    <DisplayName>WinStoreTemplate</DisplayName>
     <PublisherDisplayName>Alexej Sommer</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -14,8 +14,8 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WinStoreAdvancedDemo.App">
-      <m2:VisualElements DisplayName="WinStoreAdvancedDemo" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="WinStoreAdvancedDemo" ForegroundText="light" BackgroundColor="#464646">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WinStoreTemplate.App">
+      <m2:VisualElements DisplayName="Windows Store App template" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="More than just Windows Store application Blank template" ForegroundText="light" BackgroundColor="#464646">
         <m2:DefaultTile ShortName="WinStoreTemplateApp">
         </m2:DefaultTile>
         <m2:SplashScreen Image="Assets\SplashScreen.png" />
