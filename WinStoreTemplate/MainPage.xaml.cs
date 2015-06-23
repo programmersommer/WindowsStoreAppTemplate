@@ -27,7 +27,7 @@ namespace WinStoreTemplate
     {
 
         int appRunCount = 0;
-        Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
+        Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
         private DataTransferManager dataTransferManager;
 

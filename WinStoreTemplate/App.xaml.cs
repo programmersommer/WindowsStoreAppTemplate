@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using Windows.UI.Notifications;
+using Windows.UI.ApplicationSettings;
+using Windows.UI.Popups;
+
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -121,7 +124,7 @@ namespace WinStoreTemplate
             //    #  обновление квадратного тайла
             var tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150Text04);
            var tileAttributes = tileXml.GetElementsByTagName("text");
-            string tiletext = "Какой - либо текст для отображения на тайле";
+            string tiletext = "Some text to be shown on tile";
             tileAttributes[0].AppendChild(tileXml.CreateTextNode(tiletext));
             var tileNotification = new TileNotification(tileXml);
             tileNotification.ExpirationTime = DateTimeOffset.UtcNow.AddHours(1);
@@ -130,7 +133,7 @@ namespace WinStoreTemplate
             //    #  обновление широкого тайла
             var tileXml2 = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150Text04);
             var tileAttributes2 = tileXml2.GetElementsByTagName("text");
-            var tiletext2 = "Какой - либо текст для отображения на тайле";
+            var tiletext2 = "Some text to be shown on tile";
             tileAttributes2[0].AppendChild(tileXml2.CreateTextNode(tiletext2));
             var tileNotification2 = new TileNotification(tileXml2);
             tileNotification2.ExpirationTime = DateTimeOffset.UtcNow.AddHours(1);
@@ -138,6 +141,28 @@ namespace WinStoreTemplate
 
             // так можно очистить:   TileUpdateManager.CreateTileUpdaterForApplication().Clear();
         }
+
+
+
+        protected override void OnWindowCreated(WindowCreatedEventArgs args)
+        {
+            SettingsPane.GetForCurrentView().CommandsRequested += OnCommandsRequested;
+        }
+
+        private void OnCommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+
+            SettingsCommand settingsCommand = new SettingsCommand("SettingsPage", "Open settings",new UICommandInvokedHandler(onSettingsCommand));
+            args.Request.ApplicationCommands.Add(settingsCommand);
+
+        }
+
+        private void onSettingsCommand(IUICommand command)
+        {
+            CustomSettingsFlyout settingsFlyout = new CustomSettingsFlyout();
+            settingsFlyout.Show();
+        }
+
 
     }
 }
