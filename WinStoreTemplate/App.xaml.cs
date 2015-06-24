@@ -121,7 +121,7 @@ namespace WinStoreTemplate
 
         void UpdateTileWithText()
         {
-            //    #  обновление квадратного тайла
+            //    #  square tile update
             var tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150Text04);
            var tileAttributes = tileXml.GetElementsByTagName("text");
             string tiletext = "Some text to be shown on tile";
@@ -130,7 +130,7 @@ namespace WinStoreTemplate
             tileNotification.ExpirationTime = DateTimeOffset.UtcNow.AddHours(1);
             TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotification);
 
-            //    #  обновление широкого тайла
+            //    #  wide tile update
             var tileXml2 = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150Text04);
             var tileAttributes2 = tileXml2.GetElementsByTagName("text");
             var tiletext2 = "Some text to be shown on tile";
@@ -139,7 +139,7 @@ namespace WinStoreTemplate
             tileNotification2.ExpirationTime = DateTimeOffset.UtcNow.AddHours(1);
             TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotification2);
 
-            // так можно очистить:   TileUpdateManager.CreateTileUpdaterForApplication().Clear();
+            // you can clean tile this way:   TileUpdateManager.CreateTileUpdaterForApplication().Clear();
         }
 
 

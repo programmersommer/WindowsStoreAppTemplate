@@ -55,7 +55,7 @@ namespace WinStoreTemplate
         {
             try
             {
-                //регистрируем страницу как источник share
+                // register this page as share source
                 this.dataTransferManager = DataTransferManager.GetForCurrentView();
                 this.dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.DataRequested);
             }
@@ -66,7 +66,7 @@ namespace WinStoreTemplate
         {
             try
             {
-                // удаляем регистрацию
+                // unregister as share source
                 this.dataTransferManager.DataRequested -= new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.DataRequested);
             }
             catch { }
@@ -76,9 +76,9 @@ namespace WinStoreTemplate
         {
             Uri dataPackageUri = new Uri("http://apps.microsoft.com/windows/ru-ru/app/mp3/0122ffd9-585f-4b3d-a2ad-571f74231d14");
             DataPackage requestData = e.Request.Data;
-            requestData.Properties.Title = "Прикольное приложение";
+            requestData.Properties.Title = "Funny App";
             requestData.SetWebLink(dataPackageUri);
-            requestData.Properties.Description = "И здесь добавить какое-то описание.Как правило, текст содержит рекомендацию установить приложение.";
+            requestData.Properties.Description = "You can add some description there. Usually recommendation to install app";
         }
 
         private void ShareButton_Click(object sender, RoutedEventArgs e)
@@ -96,11 +96,11 @@ namespace WinStoreTemplate
         {
             if (appRunCount == 5)
             {
-                var messageDialog = new Windows.UI.Popups.MessageDialog("Оставьте, пожалуйста, отзыв о приложении", "Проголосуйте за нас!");
-                // можем добавить не больше трех команд/вариантов выбора 
-                messageDialog.Commands.Add(new Windows.UI.Popups.UICommand("Поставить оценку", new Windows.UI.Popups.UICommandInvokedHandler(CommandHandler)));
-                messageDialog.Commands.Add(new Windows.UI.Popups.UICommand("Я уже ставил оценку", new Windows.UI.Popups.UICommandInvokedHandler(CommandHandler)));
-                messageDialog.Commands.Add(new Windows.UI.Popups.UICommand("В другой раз", new Windows.UI.Popups.UICommandInvokedHandler(CommandHandler)));
+                var messageDialog = new Windows.UI.Popups.MessageDialog("Please vote for this App", "Write a review!");
+ 
+                messageDialog.Commands.Add(new Windows.UI.Popups.UICommand("Vote for app", new Windows.UI.Popups.UICommandInvokedHandler(CommandHandler)));
+                messageDialog.Commands.Add(new Windows.UI.Popups.UICommand("I have already voted", new Windows.UI.Popups.UICommandInvokedHandler(CommandHandler)));
+                messageDialog.Commands.Add(new Windows.UI.Popups.UICommand("Next time", new Windows.UI.Popups.UICommandInvokedHandler(CommandHandler)));
 
                 messageDialog.DefaultCommandIndex = 0;
                 messageDialog.CancelCommandIndex = 2;
@@ -110,7 +110,7 @@ namespace WinStoreTemplate
 
         private async void CommandHandler(IUICommand command)
         {
-            if (command.Label=="Поставить оценку")
+            if (command.Label== "Vote for app")
             {
                 var uri = new Uri("ms-windows-store:PDP?PFN=9cc1e6dd-9d82-4736-aee5-acb9a01d9c39_jx7smx7qqfhe4");
                 await Windows.System.Launcher.LaunchUriAsync(uri);
