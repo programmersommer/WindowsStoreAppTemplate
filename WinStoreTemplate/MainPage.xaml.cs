@@ -140,6 +140,7 @@ namespace WinStoreTemplate
             //Windows.Foundation.Rect rect = MainPage.GetElementRect((FrameworkElement)sender);
 
             // that's a temporary code for Visual Studio 2015 RC and Windows 10 preview
+            // that replaces line above
             var button = sender as Button;
             var ttv = button.TransformToVisual(Window.Current.Content);
             Point screenCoords = ttv.TransformPoint(new Point(0, 0));
