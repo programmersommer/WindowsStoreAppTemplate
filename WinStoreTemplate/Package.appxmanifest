@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="9cc1e6dd-9d82-4736-aee5-acb9a01d9c39" Publisher="CN=Alexej Sommer" Version="1.0.0.0" />
+  <Identity Name="9cc1e6dd-9d82-4736-aee5-acb9a01d9c39" Publisher="CN=asommer" Version="1.0.0.0" />
   <Properties>
     <DisplayName>WinStoreTemplate</DisplayName>
     <PublisherDisplayName>Alexej Sommer</PublisherDisplayName>

@@ -14,8 +14,8 @@
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>WinStoreAdvancedDemo_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>375A5901755E562D63F62EB98E7BABB03FB75D3B</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>WinStoreTemplate_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>7D9E7B4B5903D3F79EB81AAF7C2C359815ED5DD0</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -104,6 +104,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="WinStoreTemplate_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -121,7 +122,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="WinStoreAdvancedDemo_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />

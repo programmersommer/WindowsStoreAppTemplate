@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Popups;
 
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace WinStoreTemplate
