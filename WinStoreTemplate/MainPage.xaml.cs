@@ -122,12 +122,12 @@ namespace WinStoreTemplate
         {
             if (showPinButton)
             {
-                btnSecTile.Label = "Прикрепить";
+                btnSecTile.Label = "Pin";
                 btnSecTile.Icon = new SymbolIcon(Symbol.Pin);
             }
             else
             {
-                btnSecTile.Label = "Открепить";
+                btnSecTile.Label = "UnPin";
                 btnSecTile.Icon = new SymbolIcon(Symbol.UnPin);
             }
             this.btnSecTile.UpdateLayout();
@@ -158,7 +158,7 @@ namespace WinStoreTemplate
             {
                 // Pin
                 Uri square150x150Logo = new Uri("ms-appx:///Assets/Logo.scale-100.png");
-                string tileActivationArguments = "Вспомогательная плитка была добавлена в = " + DateTime.Now.ToLocalTime().ToString();
+                string tileActivationArguments = "Secondary tile was pinned at = " + DateTime.Now.ToLocalTime().ToString();
                 string displayName = "App Template";
 
                 TileSize newTileDesiredSize = TileSize.Square150x150;
