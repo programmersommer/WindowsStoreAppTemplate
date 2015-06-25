@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Popups;
-
+using Windows.UI.StartScreen;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -118,7 +118,65 @@ namespace WinStoreTemplate
             }
         }
 
+        public void ToggleAppBarButton(bool showPinButton)
+        {
+            if (showPinButton)
+            {
+                btnSecTile.Label = "Прикрепить";
+                btnSecTile.Icon = new SymbolIcon(Symbol.Pin);
+            }
+            else
+            {
+                btnSecTile.Label = "Открепить";
+                btnSecTile.Icon = new SymbolIcon(Symbol.UnPin);
+            }
+            this.btnSecTile.UpdateLayout();
+        }
 
+        private async void btnSecTile_Click(object sender, RoutedEventArgs e)
+        {
+
+            // this line should work
+            //Windows.Foundation.Rect rect = MainPage.GetElementRect((FrameworkElement)sender);
+
+            // that's a temporary code for Visual Studio 2015 RC and Windows 10 preview
+            var button = sender as Button;
+            var ttv = button.TransformToVisual(Window.Current.Content);
+            Point screenCoords = ttv.TransformPoint(new Point(0, 0));
+            Windows.Foundation.Rect rect = new Rect(screenCoords.X, screenCoords.Y, 10, 10);
+
+
+
+            if (SecondaryTile.Exists("MyUnicTileID"))
+            {
+                SecondaryTile secondaryTile = new SecondaryTile("MyUnicTileID");
+
+                bool isUnpinned = await secondaryTile.RequestDeleteForSelectionAsync(rect, Windows.UI.Popups.Placement.Above);
+                ToggleAppBarButton(isUnpinned);
+            }
+            else
+            {
+                // Pin
+                Uri square150x150Logo = new Uri("ms-appx:///Assets/Logo.scale-100.png");
+                string tileActivationArguments = "Вспомогательная плитка была добавлена в = " + DateTime.Now.ToLocalTime().ToString();
+                string displayName = "App Template";
+
+                TileSize newTileDesiredSize = TileSize.Square150x150;
+                SecondaryTile secondaryTile = new SecondaryTile("MyUnicTileID",
+                                                                displayName,
+                                                                tileActivationArguments,
+                                                                square150x150Logo,
+                                                                newTileDesiredSize);
+
+                secondaryTile.VisualElements.Square30x30Logo = new Uri("ms-appx:///Assets/SmallLogo.scale-100.png");
+                secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = true;
+                secondaryTile.VisualElements.ForegroundText = ForegroundText.Light;
+
+                bool isPinned = await secondaryTile.RequestCreateForSelectionAsync(rect, Windows.UI.Popups.Placement.Above);
+                ToggleAppBarButton(!isPinned);
+            }
+
+        }
 
     }
 }
