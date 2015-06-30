@@ -61,8 +61,6 @@ namespace WinStoreTemplate
                 this.dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.DataRequested);
             }
             catch { }
-
-
         }
 
    protected override void OnNavigatedFrom(NavigationEventArgs e)
