@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Navigation;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Popups;
 using Windows.UI.StartScreen;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -144,6 +146,7 @@ namespace WinStoreTemplate
 
                 bool isUnpinned = await secondaryTile.RequestDeleteForSelectionAsync(rect, Windows.UI.Popups.Placement.Above);
                 ToggleAppBarButton(isUnpinned);
+                ShowToast("Tile is unpinned");
             }
             else
             {
@@ -165,6 +168,7 @@ namespace WinStoreTemplate
 
                 bool isPinned = await secondaryTile.RequestCreateForSelectionAsync(rect, Windows.UI.Popups.Placement.Above);
                 ToggleAppBarButton(!isPinned);
+                ShowToast("Tile is pinned");
             }
 
         }
@@ -175,6 +179,24 @@ namespace WinStoreTemplate
             Point point = buttonTransform.TransformPoint(new Point());
             return new Rect(point, new Size(element.ActualWidth, element.ActualHeight));
         }
+
+        void ShowToast(string whattext)
+        {
+            XmlDocument toastXml2 = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
+            XmlNodeList stringElements = toastXml2.GetElementsByTagName("text");
+            stringElements[0].AppendChild(toastXml2.CreateTextNode(whattext));
+            ToastNotification toast2 = new ToastNotification(toastXml2);
+
+            toast2.Activated += ToastActivated;
+            toast2.Dismissed += ToastDismissed;
+            toast2.Failed += ToastFailed;
+
+            ToastNotificationManager.CreateToastNotifier().Show(toast2);
+        }
+
+        private void ToastFailed(ToastNotification sender, ToastFailedEventArgs args) { }
+        private void ToastDismissed(ToastNotification sender, ToastDismissedEventArgs args) { }
+        private void ToastActivated(ToastNotification sender, object args) { }
 
     }
 }
