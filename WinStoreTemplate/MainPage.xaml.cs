@@ -61,6 +61,15 @@ namespace WinStoreTemplate
                 this.dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.DataRequested);
             }
             catch { }
+
+            if (SecondaryTile.Exists("MyUnicTileID"))
+            {
+                ToggleAppBarButton(false);
+            }
+            else
+            {
+                ToggleAppBarButton(true);
+            }
         }
 
    protected override void OnNavigatedFrom(NavigationEventArgs e)
