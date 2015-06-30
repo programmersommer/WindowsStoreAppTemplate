@@ -136,17 +136,7 @@ namespace WinStoreTemplate
         private async void btnSecTile_Click(object sender, RoutedEventArgs e)
         {
 
-            // this line should work
-            //Windows.Foundation.Rect rect = MainPage.GetElementRect((FrameworkElement)sender);
-
-            // that's a temporary code for Visual Studio 2015 RC and Windows 10 preview
-            // that replaces line above
-            var button = sender as Button;
-            var ttv = button.TransformToVisual(Window.Current.Content);
-            Point screenCoords = ttv.TransformPoint(new Point(0, 0));
-            Windows.Foundation.Rect rect = new Rect(screenCoords.X, screenCoords.Y, 10, 10);
-
-
+            Windows.Foundation.Rect rect = GetElementRect((FrameworkElement)sender);
 
             if (SecondaryTile.Exists("MyUnicTileID"))
             {
@@ -177,6 +167,13 @@ namespace WinStoreTemplate
                 ToggleAppBarButton(!isPinned);
             }
 
+        }
+
+        public static Rect GetElementRect(FrameworkElement element)
+        {
+            GeneralTransform buttonTransform = element.TransformToVisual(null);
+            Point point = buttonTransform.TransformPoint(new Point());
+            return new Rect(point, new Size(element.ActualWidth, element.ActualHeight));
         }
 
     }

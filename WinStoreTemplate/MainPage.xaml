@@ -15,7 +15,7 @@
     <Page.BottomAppBar>
         <CommandBar IsOpen="True">
             <AppBarButton Label=" Vote and review" Icon="Like" Click="ReviewButton_Click"/>
-            <AppBarButton x:Name="btnSecTile"  Label="Add to Start" Click="btnSecTile_Click" Icon="Pin"/>
+            <AppBarButton x:Name="btnSecTile"  Label="Pin" Click="btnSecTile_Click" Icon="Pin"/>
 
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Share" Icon="OtherUser" Click="ShareButton_Click"/>
