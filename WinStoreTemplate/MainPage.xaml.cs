@@ -56,23 +56,15 @@ namespace WinStoreTemplate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            try
-            {
                 // register this page as share source
                 this.dataTransferManager = DataTransferManager.GetForCurrentView();
                 this.dataTransferManager.DataRequested += new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.DataRequested);
-            }
-            catch { }
         }
 
    protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            try
-            {
                 // unregister as share source
                 this.dataTransferManager.DataRequested -= new TypedEventHandler<DataTransferManager, DataRequestedEventArgs>(this.DataRequested);
-            }
-            catch { }
         }
 
         private void DataRequested(DataTransferManager sender, DataRequestedEventArgs e)
@@ -182,16 +174,16 @@ namespace WinStoreTemplate
 
         void ShowToast(string whattext)
         {
-            XmlDocument toastXml2 = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
-            XmlNodeList stringElements = toastXml2.GetElementsByTagName("text");
-            stringElements[0].AppendChild(toastXml2.CreateTextNode(whattext));
-            ToastNotification toast2 = new ToastNotification(toastXml2);
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
+            XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
+            stringElements[0].AppendChild(toastXml.CreateTextNode(whattext));
+            ToastNotification toast = new ToastNotification(toastXml);
 
-            toast2.Activated += ToastActivated;
-            toast2.Dismissed += ToastDismissed;
-            toast2.Failed += ToastFailed;
+            toast.Activated += ToastActivated;
+            toast.Dismissed += ToastDismissed;
+            toast.Failed += ToastFailed;
 
-            ToastNotificationManager.CreateToastNotifier().Show(toast2);
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
 
         private void ToastFailed(ToastNotification sender, ToastFailedEventArgs args) { }
