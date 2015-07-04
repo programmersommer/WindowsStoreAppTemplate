@@ -7,8 +7,8 @@
     <ProjectGuid>{D4A62649-6634-4C5F-AF5A-F70E6E87BE5B}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WinStoreAdvancedDemo</RootNamespace>
-    <AssemblyName>WinStoreAdvancedDemo</AssemblyName>
+    <RootNamespace>WinStoreTemplate</RootNamespace>
+    <AssemblyName>WinStoreTemplate</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -102,10 +102,6 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="WinStoreTemplate_TemporaryKey.pfx" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
